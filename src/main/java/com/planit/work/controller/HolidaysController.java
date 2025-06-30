@@ -7,7 +7,9 @@ import com.planit.work.dto.req.SearchReq;
 import com.planit.work.dto.res.JsonResultRes;
 import com.planit.work.service.HolidaysSerivce;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,7 @@ public class HolidaysController {
 
     @GetMapping("/select")
     @Operation(summary = "검색", description = "연도별·국가별 필터 기반 공휴일 조회")
-    public Object selectHolidays(SearchReq req){
+    public Object selectHolidays(@ParameterObject SearchReq req){
         JsonResultRes res = new JsonResultRes(false, null);
 
         try{
@@ -48,7 +50,7 @@ public class HolidaysController {
 
     @PostMapping("/refresh")
     @Operation(summary = "재동기화", description = "특정 연도·국가 데이터를 재호출하여 덮어쓰기")
-    public Object holidaysRefresh(RefreshReq req){
+    public Object holidaysRefresh(@ParameterObject RefreshReq req){
         boolean result = holidaysSerivce.holidaysRefresh(req);
         JsonResultRes res = new JsonResultRes(result, null);
         return res;
@@ -57,7 +59,7 @@ public class HolidaysController {
 
     @PostMapping("/delete")
     @Operation(summary = "삭제", description = "특정 연도·국가의 공휴일 레코드 전체 삭제")
-    public Object holidaysDelete(DeleteReq req){
+    public Object holidaysDelete(@ParameterObject DeleteReq req){
         boolean result = holidaysSerivce.holidaysDelete(req);
         JsonResultRes res = new JsonResultRes(result, null);
         return res;
