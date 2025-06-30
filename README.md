@@ -1,5 +1,5 @@
 ## planit_work
-플랜잇 채용과제
+플랜잇스퀘어 백엔드 개발자 채용과제
 - h2 콘솔 : http://localhost:9090/h2-console/login.jsp
 
 ## 개발환경
